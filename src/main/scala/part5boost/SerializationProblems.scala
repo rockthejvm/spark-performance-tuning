@@ -75,6 +75,40 @@ object SerializationProblems {
   val peopleChecker = new LegalDrinkingAgeChecker(21)
   // peopleChecker.processPeople()
 
+  /**
+    * Take things up a notch
+    * Exercise 3: make this work
+    * - maybe change the structure of the inner classes
+    * - don't use Serializable
+    *
+    * Hint: FunctionX types are serializable
+    */
+
+  class PersonProcessor { // <- can't put Serializable here
+  class DrinkingAgeChecker(legalAge: Int) {
+    val check = { // <- 1: make this a val instead of a method
+      val capturedLegalAge = legalAge // <- 3: capture the constructor argument
+      age: Int => age >= capturedLegalAge
+    }
+  }
+
+    class DrinkingAgeFlagger(checker: Int => Boolean) {
+      def flag() = {
+        val capturedChecker = checker // <- 2: capture the lambda
+        people.map(p => capturedChecker(p.age)).collect().toList
+      }
+    }
+
+    def processPeople() = {
+      val usChecker = new DrinkingAgeChecker(21)
+      val flagger = new DrinkingAgeFlagger(usChecker.check)
+      flagger.flag()
+    }
+  }
+
+  val personProcessor = new PersonProcessor
+  personProcessor.processPeople()
+
   def main(args: Array[String]): Unit = {
 
   }
