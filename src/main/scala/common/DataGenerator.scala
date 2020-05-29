@@ -1,12 +1,5 @@
 package common
 
-import java.io.{File, FileWriter, PrintWriter}
-
-import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions._
-
-import scala.annotation.tailrec
-import scala.io.Source
 import scala.util.Random
 
 object DataGenerator {
