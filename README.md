@@ -53,7 +53,7 @@ The tags are as follows:
 * `2.1-job-anatomy`
 * `2.2-query-plans`
 * `2.3-query-plans-exercises`
-* `2.4-sp`
+* `2.4-spark-ui-dags`
 * `2.5-api-differences`
 * `2.6-deploy-config`
 * `2.7-catalyst`
