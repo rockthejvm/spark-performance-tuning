@@ -1,4 +1,4 @@
-# The official repository for the Rock the JVM Spark Optimization 2 course
+# The official repository for the Rock the JVM Spark Performance Tuning course
 
 Powered by [Rock the JVM!](rockthejvm.com)
 
