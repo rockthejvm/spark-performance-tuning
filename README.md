@@ -2,7 +2,7 @@
 
 Powered by [Rock the JVM!](rockthejvm.com)
 
-This repository contains the code we wrote during [Rock the JVM's Spark Optimization 2](https://rockthejvm.com/course/spark-optimization-2) course. Unless explicitly mentioned, the code in this repository is exactly what was caught on camera.
+This repository contains the code we wrote during [Rock the JVM's Spark Performance Tuning](https://rockthejvm.com/course/spark-performance-tuning) course. Unless explicitly mentioned, the code in this repository is exactly what was caught on camera.
 
 ### Install and setup
 
