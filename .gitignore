@@ -230,3 +230,4 @@ spark-warehouse/
 
 # Daniel added
 src/main/resources/generated/
+.bsp
