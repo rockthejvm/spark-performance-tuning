@@ -1,5 +1,5 @@
 
-name := "spark-optimization-2"
+name := "spark-performance-tuning"
 
 version := "0.2"
 
