@@ -35,6 +35,7 @@ object Caching {
     // StorageLevel.MEMORY_ONLY_SER_2 // memory only, serialized, replicated 2x
 
     /* off-heap */
+    // UPDATE - on JDK 17+ with G1GC (Spark 4 default), off-heap caching avoids G1GC pause-time overhead on large heaps
     StorageLevel.OFF_HEAP // cache outside the JVM, done with Tungsten, still stored on the machine RAM, needs to be configured, CPU efficient and memory efficient
   )
 

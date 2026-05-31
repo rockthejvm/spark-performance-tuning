@@ -46,6 +46,12 @@ object TestDeployApp {
         --driver-memory = spark.driver.memory
 
         and many more.
+
+      UPDATE - Spark 4 requires JDK 17+, and G1GC is now the default garbage collector.
+      CMS (-XX:+UseConcMarkSweepGC) was removed in JDK 14 and will FAIL on startup.
+      For GC tuning, use G1GC flags instead:
+        --conf "spark.executor.extraJavaOptions=-XX:+UseG1GC -XX:G1HeapRegionSize=16m -XX:InitiatingHeapOccupancyPercent=35"
+        --conf "spark.driver.extraJavaOptions=-XX:+UseG1GC -XX:G1HeapRegionSize=16m"
     */
     goodComediesDF.show()
 

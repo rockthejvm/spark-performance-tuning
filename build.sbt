@@ -1,18 +1,12 @@
 
 name := "spark-performance-tuning"
 
-version := "0.2"
+version := "0.3"
 
-scalaVersion := "2.13.12"
-val sparkVersion = "3.5.0"
-val postgresVersion = "42.6.0"
-val log4jVersion = "2.20.0"
-
-resolvers ++= Seq(
-  "bintray-spark-packages" at "https://dl.bintray.com/spark-packages/maven",
-  "Typesafe Simple Repository" at "https://repo.typesafe.com/typesafe/simple/maven-releases",
-  "MavenRepository" at "https://mvnrepository.com"
-)
+// UPDATE - Spark 4.1.1 requires Scala 2.13.17+ and JDK 17+
+scalaVersion := "2.13.17"
+val sparkVersion = "4.1.1"
+val log4jVersion = "2.24.3"
 
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % sparkVersion,

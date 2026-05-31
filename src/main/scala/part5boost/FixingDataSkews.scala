@@ -29,6 +29,13 @@ object FixingDataSkews {
       compute avg(sale prices of ALL GuitarSales of Gibson L-00 with sound quality between 4.2 and 4.4
    */
 
+  // UPDATE - Spark 4 AQE (Adaptive Query Execution) handles many skew cases automatically via
+  // spark.sql.adaptive.skewJoin.enabled (default true). AQE detects skewed partitions at runtime
+  // and splits them into smaller sub-partitions. Manual salting (shown below) is still needed when:
+  //   - AQE can't detect the skew (e.g. skew emerges after a non-equi join condition)
+  //   - the skew is in a non-join operation (aggregations, window functions)
+  //   - you need deterministic partition control
+
   def naiveSolution() = {
     val joined = guitars.join(guitarSales, Seq("make", "model"))
       .where(abs(guitarSales("soundScore") - guitars("soundScore")) <= 0.1)

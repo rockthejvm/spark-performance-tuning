@@ -52,6 +52,11 @@ object PartitioningProblems {
     // estimateRDD()
 
     // 10-100MB rule for partition size for UNCOMPRESSED DATA
+
+    // UPDATE - Spark 4 introduces spark.sql.maxSinglePartitionBytes (default 128MB)
+    // This enforces a hard cap on partition size. Previously partitions could grow unbounded.
+    // Jobs with very large partitions will now automatically get more partitions.
+    // Override with: spark.conf.set("spark.sql.maxSinglePartitionBytes", "268435456") // 256MB
     Thread.sleep(10000000)
   }
 

@@ -70,6 +70,10 @@ object SparkRecap {
       |select Name from cars where Origin = 'USA'
     """.stripMargin
   )
+  // UPDATE - Spark 4: spark.sql.ansi.enabled is now TRUE by default
+  // division by zero throws DIVIDE_BY_ZERO instead of returning null
+  // overflow in casts throws CAST_OVERFLOW instead of wrapping silently
+  // be mindful of this when writing SQL or DataFrame expressions
 
   // low-level API: RDDs
   val sc = spark.sparkContext

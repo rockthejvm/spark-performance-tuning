@@ -33,6 +33,9 @@ object CatalystDemo {
   val filterBoth = filterTeam1(filterTeam2(flights))
   filterBoth.explain(true)
 
+  // UPDATE - Spark 4 Catalyst has improved multi-key dynamic partition pruning (DPP)
+  // and multi-layer runtime filters. More filters are pushed down at multiple query plan layers.
+
   // pushing down filters all the way to the data source - do not read records in the first place
   flights.write.save("src/main/resources/data/flights_parquet")
 

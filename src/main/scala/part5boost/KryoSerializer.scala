@@ -30,6 +30,9 @@ object KryoSerializer {
 
   def testCaching() = {
     people.persist(StorageLevel.MEMORY_ONLY_SER).count()
+    // UPDATE - benchmarks below were measured on JDK 8 with Spark 3.x.
+    // JDK 17+ with G1GC will produce different numbers. Re-run on your setup.
+    // The relative advantage of Kryo over Java serialization still holds.
     /*
       Java serialization
       - memory usage 254MB
@@ -43,6 +46,7 @@ object KryoSerializer {
 
   def testShuffling() = {
     people.map(p => (p.age, p)).groupByKey().mapValues(_.size).count()
+    // UPDATE - same note: re-benchmark on JDK 17+. Kryo still wins on shuffle size.
     /*
       Java serialization
       - shuffle 72.5 MB

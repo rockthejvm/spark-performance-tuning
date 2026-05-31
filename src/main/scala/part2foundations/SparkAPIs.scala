@@ -19,6 +19,7 @@ object SparkAPIs {
   val sc = spark.sparkContext
 
   // small count comparison
+  // UPDATE - timings below were measured on JDK 8 with Spark 3.x. JDK 17+ and G1GC change the performance profile. Re-benchmark on your setup.
   val numbers = 1 to 1000000000
   val rdd = sc.parallelize(1 to 1000000000)
   rdd.count() // ~10s on camera - might vary on your PC
@@ -121,6 +122,10 @@ object SparkAPIs {
   /**
     * Lesson 2: use DFs most of the time. Spark optimizes most stuff away.
     * Lesson 3: Lambdas are impossible to optimize.
+    *
+    * UPDATE - query plans in the comments above were captured on Spark 3.x.
+    * Run explain() on Spark 4 to see updated plans. The teaching point still holds:
+    * lambdas force DeserializeToObject and prevent Catalyst optimization.
     */
 
 }

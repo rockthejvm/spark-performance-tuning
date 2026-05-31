@@ -20,6 +20,7 @@ object ReadingQueryPlans {
   val simpleNumbers = spark.range(1, 1000000)
   val times5 = simpleNumbers.selectExpr("id * 5 as id")
   times5.explain() // this is how you show a query plan
+  // UPDATE - query plan output may differ in Spark 4 (AQE changes, new plan format). Re-run explain() to see current output.
   /*
     == Physical Plan ==
     *(1) Project [(id#0L * 5) AS id#2L]
