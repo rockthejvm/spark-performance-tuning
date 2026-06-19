@@ -231,3 +231,8 @@ spark-warehouse/
 # Daniel added
 src/main/resources/generated/
 .bsp
+
+# spark4-cluster generated artifacts (k3s kubeconfig holds cluster credentials)
+spark4-cluster/k8s/kubeconfig/
+spark4-cluster/spark-data/*
+!spark4-cluster/spark-data/.gitkeep

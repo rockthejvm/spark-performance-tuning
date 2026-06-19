@@ -11,6 +11,13 @@ object KubernetesDeployment {
     * Mesos support was removed in Spark 4. This lesson covers Kubernetes-specific
     * performance tuning — how to size pods, manage shuffle data, and configure
     * dynamic allocation without an external shuffle service.
+    *
+    * ── RUNNABLE PROOF ──────────────────────────────────────────────────────────────
+    * Section 4 (CPU requests vs limits) has a full hands-on demonstration on a real
+    * single-node Kubernetes cluster running in Docker. It runs part6spark4.CpuThrottlingBenchmark
+    * twice with the SAME spark.executor.cores but different CPU limits and measures the
+    * wall-clock + cgroup cpu.stat difference. Step by step:
+    *     spark4-cluster/k8s/README.md
     */
 
   val spark = SparkSession.builder()
@@ -102,6 +109,10 @@ object KubernetesDeployment {
     Throttling is silent (no logs, no events) — the pod just gets slower.
     Best practice: set limit 1.5-2x the request, or omit it entirely.
 
+    >> PROVE IT: spark4-cluster/k8s/README.md runs CpuThrottlingBenchmark on a real k3s node
+       with limit==request (throttled) vs limit>request (burstable). Same job, ~2x slower when
+       throttled, and /sys/fs/cgroup/cpu.stat nr_throttled climbs only in the throttled run.
+
     For memory:
       Spark sets memory request = memory limit automatically (Guaranteed QoS).
       This is intentional — Spark sets both -Xms and -Xmx, so exceeding the limit is a real OOM.
@@ -192,5 +203,11 @@ object KubernetesDeployment {
   def main(args: Array[String]): Unit = {
     println("This lesson is primarily a reference for Kubernetes deployment configurations.")
     println("Run the examples via spark-submit with --master k8s://...")
+    println()
+    println("Hands-on CPU-throttling proof (real k3s-in-Docker cluster):")
+    println("  see spark4-cluster/k8s/README.md — runs part6spark4.CpuThrottlingBenchmark")
+    println("  twice (throttled limit==request vs burstable limit>request) and compares")
+    println("  wall-clock time + /sys/fs/cgroup/cpu.stat.")
+    spark.stop()
   }
 }

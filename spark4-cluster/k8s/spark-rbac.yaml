@@ -1,0 +1,42 @@
+# RBAC for Spark on Kubernetes.
+#
+# In cluster deploy-mode the DRIVER pod itself creates and deletes EXECUTOR pods through the
+# Kubernetes API. To do that it needs a service account with rights over pods/services/
+# configmaps in its namespace. Without this, executors never get created and the job hangs.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: spark-demo
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: spark
+  namespace: spark-demo
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: spark-role
+  namespace: spark-demo
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services", "configmaps", "persistentvolumeclaims"]
+    verbs: ["get", "list", "watch", "create", "delete", "deletecollection"]
+  - apiGroups: [""]
+    resources: ["pods/log", "pods/exec"]
+    verbs: ["get", "list", "create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: spark-role-binding
+  namespace: spark-demo
+subjects:
+  - kind: ServiceAccount
+    name: spark
+    namespace: spark-demo
+roleRef:
+  kind: Role
+  name: spark-role
+  apiGroup: rbac.authorization.k8s.io
