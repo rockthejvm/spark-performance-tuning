@@ -41,35 +41,6 @@ Start by cloning this repository and checkout the `start` tag:
 git checkout start
 ```
 
-### How to run an intermediate state
-
-The repository was built while recording the lectures. Prior to each lecture, I tagged each commit so you can easily go back to an earlier state of the repo!
-
-The tags are as follows:
-
-* `start`
-* `1.1-scala-recap`
-* `1.2-spark-recap`
-* `2.1-job-anatomy`
-* `2.2-query-plans`
-* `2.3-query-plans-exercises`
-* `2.4-spark-ui-dags`
-* `2.5-api-differences`
-* `2.6-deploy-config`
-* `2.7-catalyst`
-* `2.8-tungsten`
-* `3.2-caching`
-* `3.3-checkpointing`
-* `4.1-repartition-coalesce`
-* `4.2-partitioning-problems`
-* `4.3-partitioners`
-* `5.1-data-skews`
-* `5.2-serialization-problems`
-* `5.3-serialization-problems-2`
-* `5.4-kryo`
-
-When you watch a lecture, you can `git checkout` the appropriate tag and the repo will go back to the exact code I had when I started the lecture.
-
 ### For questions or suggestions
 
 If you have changes to suggest to this repo, either
